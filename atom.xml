@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Mycrazy的博客</title>
+  <subtitle>You have a dream, you got to protect it.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://mycrazy.github.io/"/>
+  <updated>2016-06-14T09:43:11.000Z</updated>
+  <id>https://mycrazy.github.io/</id>
+  
+  <author>
+    <name>mycrazy</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo搭建博客</title>
+    <link href="https://mycrazy.github.io/2016/06/14/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>https://mycrazy.github.io/2016/06/14/hexo搭建个人博客/</id>
+    <published>2016-06-14T08:53:22.000Z</published>
+    <updated>2016-06-14T09:43:11.000Z</updated>
+    
+    <content type="html">&lt;p&gt;本文主要是记录自己在搭建blog的过程，以便自己忘记的时候查阅。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;环境说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平台：mac&lt;/li&gt;
+&lt;li&gt;软件：Node.js，git，hexo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;关于git&lt;/strong&gt;&lt;br&gt;首先必须有github账号，并且配置好ssh key，如果没有自行Google。&lt;br&gt;配置好之后，如下图。&lt;br&gt;&lt;img src=&quot;/images/sshkey.png&quot; title=&quot;set sshkey&quot;&gt;&lt;/p&gt;
+&lt;p&gt;测试是否连接自己的github账号&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ssh -T git@github.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果能够连接成功，会出现如下内容&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Hi mycrazy! You&amp;apos;ve successfully authenticated, but GitHub does not provide shell access.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;参考地址：&lt;a href=&quot;https://help.github.com/articles/testing-your-ssh-connection/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://help.github.com/articles/testing-your-ssh-connection/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装Node.js&lt;/strong&gt;&lt;br&gt;下载并安装Node.js。&lt;a href=&quot;https://nodejs.org/en/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网地址&lt;/a&gt;&lt;br&gt;建议安装完之后重启电脑，否则在安装hexo的时候很有可能会出现安装无效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装hexo&lt;/strong&gt;&lt;br&gt;hexo帮助文档，一般只看该文档就可以了。&lt;br&gt;&lt;a href=&quot;https://hexo.io/zh-cn/docs/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/zh-cn/docs/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;hexo常用的命令&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hexo g #完整命令为hexo generate,用于生成静态文件&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hexo s #完整命令为hexo server,用于启动服务器，主要用来本地预览&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hexo d #完整命令为hexo deploy,用于将本地文件发布到github上&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hexo n #完整命令为hexo new,用于新建一篇文章&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;添加sudo代表使用root权限就行安装&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo npm install -g hexo&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果不添加sudo，会没有权限。参照网址:&lt;a href=&quot;http://stackoverflow.com/questions/35954725/error-eacces-permission-denied-when-trying-to-install-eslint-using-npm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://stackoverflow.com/questions/35954725/error-eacces-permission-denied-when-trying-to-install-eslint-using-npm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;安装完成之后，查看安装hexo版本&lt;br&gt;使用 hexo -v&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hexo-cli: 1.0.1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;os: Darwin 15.5.0 darwin x64&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;http_parser: 2.5.2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;node: 4.4.5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;v8: 4.5.103.35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;uv: 1.8.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;zlib: 1.2.8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ares: 1.10.1-DEV&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;icu: 56.1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;modules: 46&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;openssl: 1.0.2h&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;创建一个网站目录文件夹，比如blog，然后cd命令进入该目录。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd /Users/用户名/Desktop/blog&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;pwd 显示当前目录，确认是否自己需要的目录&lt;/p&gt;
+&lt;p&gt;如果无误执行如下命令，构建网站目录。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hexo init blog&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd blog&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;npm install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;会生成如下几个文件&lt;br&gt;&lt;img src=&quot;/images/file.png&quot; title=&quot;file&quot;&gt;&lt;/p&gt;
+&lt;p&gt;每个文件夹的存放内容&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;scaffolds 脚手架，也就是一个工具模板&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;scripts 写文件的js，扩展hexo的功能&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;source 存放博客正文内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;source/_posts 文件箱&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;themes 存放皮肤的目录&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;themes/landscape 默认的皮肤&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_config.yml 全局的配置文件&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;db.json 静态常量&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;node_modules 插件安装目录&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;启动hexo服务器&lt;/strong&gt;&lt;br&gt;hexo server 或者 hexo s&lt;br&gt;弹出如下信息&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;INFO  Start processing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;^CINFO  Have a nice day&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Ctrl+C停止服务，如果直接强制关闭了终端。则该端口会被占用。&lt;br&gt;使用如下命令更改服务器端口号&lt;br&gt;hexo server -p 5002&lt;/p&gt;
+&lt;p&gt;服务启动之后，在浏览器中打开&lt;a href=&quot;http://0.0.0.0:4000/地址，如果显示如下图片就代表成功。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://0.0.0.0:4000/地址，如果显示如下图片就代表成功。&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/images/成功.png&quot; title=&quot;file&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;部署到github网站&lt;/strong&gt;&lt;br&gt;打开hexo根目录的_config.yml文件，文件的最后配置如下信息&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;deploy:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  type: git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  repo: git@github.com:username/username.github.io.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  branch: master&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;静态化处理&lt;/strong&gt;&lt;br&gt;通过一条命令，把所有的文章都做静态化处理，就是生成对应的html, javascript, css，使得所有的文章都是由静态文件组成的。&lt;br&gt;hexo generate&lt;br&gt;在本地目录下，会生成一个public的目录，里面包括了所有静态化的文件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;部署命令&lt;/strong&gt;&lt;br&gt;hexo deploy&lt;br&gt;如果部署完全没有反应，在部署之前可能还需要执行如下命令，安装git插件&lt;br&gt;npm install hexo-deployer-git –save&lt;br&gt;执行成功之后，重新使用hexo deploy命令，部署到github上。&lt;/p&gt;
+&lt;p&gt;然后在浏览器中打开http//username.github.io你就可以看到你的blog了。&lt;br&gt;当然如果你感觉自带的主题不合你的口味，可以自定义主题或者在这个&lt;a href=&quot;https://hexo.io/themes/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://hexo.io/themes/&lt;/a&gt;&lt;br&gt;网站下载主题，然后安装即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;更新文章&lt;/strong&gt;&lt;br&gt;每次有新的文章需要更新，一般按照如下3步走。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hexo clean&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hexo generate&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参考文档：&lt;/strong&gt;&lt;br&gt;&lt;a href=&quot;http://blog.fens.me/hexo-blog-github/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;1.跨界的IT博客&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://www.haomwei.com/technology/maupassant-hexo.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;2.屠夫9441的博客&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://ibruce.info/2013/11/22/hexo-your-blog/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;3.不如的blog&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文主要是记录自己在搭建blog的过程，以便自己忘记的时候查阅。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;环境说明&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平台：mac&lt;/li&gt;
+&lt;li&gt;软件：Node.js，git，hexo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;关于gi
+    
+    </summary>
+    
+      <category term="杂七杂八" scheme="https://mycrazy.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/"/>
+    
+    
+      <category term="日记" scheme="https://mycrazy.github.io/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://mycrazy.github.io/2016/06/14/hello-world/"/>
+    <id>https://mycrazy.github.io/2016/06/14/hello-world/</id>
+    <published>2016-06-14T02:42:32.000Z</published>
+    <updated>2016-06-14T02:42:32.000Z</updated>
+    
+    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo server&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo generate&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ hexo deploy&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>new post</title>
+    <link href="https://mycrazy.github.io/2016/06/13/new-post/"/>
+    <id>https://mycrazy.github.io/2016/06/13/new-post/</id>
+    <published>2016-06-13T08:15:12.000Z</published>
+    <updated>2016-06-14T09:04:45.000Z</updated>
+    
+    <content type="html">&lt;p&gt;这是&lt;strong&gt;新的开始&lt;/strong&gt;，我用hexo创建了第一篇文章。&lt;/p&gt;
+&lt;p&gt;通过下面的命令，就可以创建新文章&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;D:\workspace\javascript\nodejs-hexo&amp;gt;hexo new 新的开始&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[info] File created at D:\workspace\javascript\nodejs-hexo\source\_posts\新的开始.md&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;感觉非常好。&lt;/p&gt;
+&lt;h2 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;headerlink&quot; title=&quot;引用&quot;&gt;&lt;/a&gt;引用&lt;/h2&gt;&lt;blockquote&gt;&lt;p&gt;Every interaction is both precious and an opportunity to delight.&lt;/p&gt;
+&lt;footer&gt;&lt;strong&gt;Seth Godin&lt;/strong&gt;&lt;cite&gt;&lt;a href=&quot;http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Welcome to Island Marketing&lt;/a&gt;&lt;/cite&gt;&lt;/footer&gt;&lt;/blockquote&gt;
+&lt;h2 id=&quot;代码块&quot;&gt;&lt;a href=&quot;#代码块&quot; class=&quot;headerlink&quot; title=&quot;代码块&quot;&gt;&lt;/a&gt;代码块&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;.compact&lt;/span&gt;&lt;a href=&quot;http://underscorejs.org/#compact&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Underscore.js&lt;/a&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;.compact([0, 1, false, 2, ‘’, 3]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;=&amp;gt; [1, 2, 3]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;链接&quot;&gt;&lt;a href=&quot;#链接&quot; class=&quot;headerlink&quot; title=&quot;链接&quot;&gt;&lt;/a&gt;链接&lt;/h2&gt;&lt;a href=&quot;http://blog.fens.me&quot; title=&quot;粉丝日志&quot; target=&quot;_blank&quot;&gt;粉丝日志&lt;/a&gt;
+&lt;h2 id=&quot;图片&quot;&gt;&lt;a href=&quot;#图片&quot; class=&quot;headerlink&quot; title=&quot;图片&quot;&gt;&lt;/a&gt;图片&lt;/h2&gt;&lt;img src=&quot;/images/auto.png&quot; width=&quot;400&quot; height=&quot;600&quot; title=&quot;这是一张图片&quot;&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是&lt;strong&gt;新的开始&lt;/strong&gt;，我用hexo创建了第一篇文章。&lt;/p&gt;
+&lt;p&gt;通过下面的命令，就可以创建新文章&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;sp
+    
+    </summary>
+    
+      <category term="日志" scheme="https://mycrazy.github.io/categories/%E6%97%A5%E5%BF%97/"/>
+    
+      <category term="第一天" scheme="https://mycrazy.github.io/categories/%E6%97%A5%E5%BF%97/%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    
+    
+      <category term="开始" scheme="https://mycrazy.github.io/tags/%E5%BC%80%E5%A7%8B/"/>
+    
+      <category term="我" scheme="https://mycrazy.github.io/tags/%E6%88%91/"/>
+    
+      <category term="日记" scheme="https://mycrazy.github.io/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+</feed>
