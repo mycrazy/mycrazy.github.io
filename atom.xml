@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://mycrazy.github.io/"/>
-  <updated>2016-06-14T09:43:11.000Z</updated>
+  <updated>2016-06-17T06:34:46.000Z</updated>
   <id>https://mycrazy.github.io/</id>
   
   <author>
@@ -16,11 +16,111 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>carthage笔记</title>
+    <link href="https://mycrazy.github.io/2016/06/17/carthage%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mycrazy.github.io/2016/06/17/carthage笔记/</id>
+    <published>2016-06-17T06:10:16.000Z</published>
+    <updated>2016-06-17T06:34:46.000Z</updated>
+    
+    <content type="html">&lt;p&gt;title: carthage笔记&lt;/p&gt;
+&lt;h2 id=&quot;tags&quot;&gt;&lt;a href=&quot;#tags&quot; class=&quot;headerlink&quot; title=&quot;tags:&quot;&gt;&lt;/a&gt;tags:&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Carthage笔记&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在iOS开发中使用到很多的第三方库，由此诞生了专门管理第三方的包管理工具。&lt;br&gt;比较流行的包管理工具CocoaPods大的，不得不说它是一个强工具。最近新项目&lt;br&gt;中使用了新的包管理工具Carthage,它灵活，轻便的特点对项目的开发还是很有好处。&lt;/p&gt;
+&lt;p&gt;CoaoaPods 是一套整体解决方案，我们在 Podfile 中指定好我们需要的第三方库。然后 CocoaPods 就会进行下载，集成，然后修改或者创建我们项目的 workspace 文件，这一系列整体操作。&lt;/p&gt;
+&lt;p&gt;相比之下，Carthage 就要轻量很多，它也会一个叫做 Cartfile 描述文件，但 Carthage 不会对我们的项目结构进行任何修改，更不多创建workspace。它只是根据我们描述文件中配置的第三方库，将他们下载到本地，然后使用 xcodebuild 构建成 framework 文件。然后由我们自己将这些库集成到项目中。Carthage 使用的是一种非侵入性的哲学。&lt;/p&gt;
+&lt;p&gt;所谓非侵入性哲学，其实可以这么理解。我想使用过 CocoaPods 的同学们，可能都会经历过这样一种体验，尤其是在最开始使用它的时候 - 我们精心在 Podfile 中配置好我们所需的第三方库，并且按照 CocoaPods 的指定步骤，输入命令，然后等待这些第三方库乖乖的集成到项目中。但总有那么几次，会事与愿违，比如运行完 pod update 命令，看似一切顺利，workspace 也成功的更新了。但当我们真正编译构建项目的时候，某些莫名其妙的错误出现了，类似于这种：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;diff: /../Podfile.lock: No such file or directory&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;diff: /Manifest.lock: No such file or directory&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;本来我们使用包管理，就是为了集成第三方库的时候更加方便，迅速。结果处理这些包管理的错误却又浪费了我们很多时间。&lt;br&gt;这与我们使用包管理的初衷可以说是完全相悖。&lt;br&gt;如果使用 Carthage 我们就不必让这些问题困扰了，因为 Carthage 本身不会对我们的项目结构进行任何改动，类似 CocoaPods 产生的这些附加问题，就不会发生了。&lt;/p&gt;
+&lt;p&gt;但是俗话说：有得必有失。Carthage就没有CocoaPods那样简单方便的集成能力了。我们必须手动将第三方关联到项目中。&lt;br&gt;在Carthage框架的说明中明确的说明了Carthage的功能。Carthage不会自动更改我们工程文件和我们的设置。&lt;br&gt;&lt;strong&gt;Carthage builds your dependencies and provides you with binary frameworks, but you retain full control over your project structure and setup. Carthage does not automatically modify your project files or your build settings.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;安装Carthage&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;首先我们需要安装 Carthage 环境，地址在这里&lt;a href=&quot;https://github.com/Carthage/Carthage&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Carthage官网&lt;/a&gt;&lt;br&gt;最新的版本是0.16.2，如下图&lt;br&gt;&lt;img src=&quot;/images/Carthage/carthage_version.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;直接下载对应的Carthage.pkg文件，点击安装&lt;br&gt;&lt;img src=&quot;/images/Carthage/Carthage_安装.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;如果你是Xcode7以后版本，你也可以使用 Homebrew（&lt;a href=&quot;http://digitizor.com/install-homebrew-osx-el-capitan/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;mac上安装Homebrew&lt;/a&gt;） 安装Carthage到你的电脑，然后运行&lt;strong&gt;brew update&lt;/strong&gt; 和 &lt;strong&gt;brew install carthage&lt;/strong&gt;命令即可。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用Carthage&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用Carthage 支持&lt;strong&gt;macOS，iOS，tvOS, or watchOS&lt;/strong&gt;。&lt;br&gt;对于iOS来书，Carthage目前只支持dynamic frameworks（注意：动态框架与iOS7不兼容）所以只能支持iOS8+。&lt;/p&gt;
+&lt;p&gt;以常用的SDWebImage为例，进行安装使用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;进入工程目录，在命令行中使用&lt;strong&gt;vim Cartfile&lt;/strong&gt;命令新建Cartfile文件&lt;/li&gt;
+&lt;li&gt;添加 &lt;strong&gt;github “rs/SDWebImage”&lt;/strong&gt; （具体的第三方库名称可能有出入，刚开始我使用github “SDWebImage”后来进入到SDWebImage官网上看原来需要rs/SDWebImage）&lt;/li&gt;
+&lt;li&gt;执行&lt;strong&gt;carthage update&lt;/strong&gt;命令&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;*** Fetching SDWebImage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Checking out SDWebImage at &amp;quot;3.8.1&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** xcodebuild output can be found in /var/folders/0v/p654mkdd7675pkhklj5xscfh0000gn/T/carthage-xcodebuild.H8H43f.log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Building scheme &amp;quot;WebImage tvOS&amp;quot; in SDWebImage.xcworkspace&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Building scheme &amp;quot;WebImage&amp;quot; in SDWebImage.xcworkspace&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;update 操作完成后，会在项目的根目录中生成一个 Carthage 目录。这个目录中又包含了两个目录 Build 和 Checkout。&lt;br&gt;Build放的是构建好的 framework 包：&lt;br&gt;&lt;img src=&quot;/images/Carthage/carthage_生成文件.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Checkout放的是第三方库的项目源文件，源文件不能删除，否则在你debug的时候无法进入到框架实现中。&lt;br&gt;&lt;img src=&quot;/images/Carthage/Carthage_源文件.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;然后在项目设置General选项卡的Linked Frameworks and Libraries中，将Carthage/Build/iOS中的framework 文件添加到项目中：&lt;br&gt;&lt;img src=&quot;/images/Carthage/Carthage_加入general.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;这些设置之后就将WebImage这个框架加入到我们的工程中了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;错误总结&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在执行&lt;strong&gt;carthage update&lt;/strong&gt;命令报如下错误&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;*** Cloning SDWebImage&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Checking out SDWebImage at &amp;quot;3.8.1&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** xcodebuild output can be found in /var/folders/0v/p654mkdd7675pkhklj5xscfh0000gn/T/carthage-xcodebuild.2oLHdm.log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Building scheme &amp;quot;WebImage tvOS&amp;quot; in SDWebImage.xcworkspace&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-17 10:05:45.212 xcodebuild[6230:1170548] [MT] PluginLoading: Required plug-in compatibility UUID F41BD31E-2683-44B8-AE7F-5F09E919790E for plug-in at path &amp;apos;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/RealmBrowser.xcplugin&amp;apos; not present in DVTPlugInCompatibilityUUIDs&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-17 10:05:52.857 xcodebuild[6341:1170824] [MT] PluginLoading: Required plug-in compatibility UUID F41BD31E-2683-44B8-AE7F-5F09E919790E for plug-in at path &amp;apos;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/RealmBrowser.xcplugin&amp;apos; not present in DVTPlugInCompatibilityUUIDs&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*** Building scheme &amp;quot;WebImage&amp;quot; in SDWebImage.xcworkspace&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-17 10:06:05.574 xcodebuild[6466:1171174] [MT] PluginLoading: Required plug-in compatibility UUID F41BD31E-2683-44B8-AE7F-5F09E919790E for plug-in at path &amp;apos;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/RealmBrowser.xcplugin&amp;apos; not present in DVTPlugInCompatibilityUUIDs&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2016-06-17 10:06:15.221 xcodebuild[6646:1171541] [MT] PluginLoading: Required plug-in compatibility UUID F41BD31E-2683-44B8-AE7F-5F09E919790E for plug-in at path &amp;apos;~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/RealmBrowser.xcplugin&amp;apos; not present in DVTPlugInCompatibilityUUIDs&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;原因是当前的xcode版本不支持RealmBrowser.xcplugin插件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1.直接暂时先从Xcode中移除RealmBrowser.xcplugin插件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.在命令行中执行：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;open -a Xcode ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/RealmBrowser.xcplugin/Contents/Info.plist&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;会在xcode中打开该插件对应的配置文件，添加对应的xcode的UUId即可。&lt;br&gt;图片&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/34333562/alamofire-error-on-carthage-update&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;参考地址&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;title: carthage笔记&lt;/p&gt;
+&lt;h2 id=&quot;tags&quot;&gt;&lt;a href=&quot;#tags&quot; class=&quot;headerlink&quot; title=&quot;tags:&quot;&gt;&lt;/a&gt;tags:&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Carthage笔记&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>realm 笔记</title>
+    <link href="https://mycrazy.github.io/2016/06/17/realm%E7%AC%94%E8%AE%B0/"/>
+    <id>https://mycrazy.github.io/2016/06/17/realm笔记/</id>
+    <published>2016-06-17T06:06:53.000Z</published>
+    <updated>2016-06-17T06:35:12.000Z</updated>
+    
+    <content type="html">&lt;hr&gt;
+&lt;p&gt;realm 笔记&lt;/p&gt;
+&lt;p&gt;Realm支持以下的属性类型：BOOL、bool、int、NSInteger、long、long long、float、double、NSString、NSDate、NSData 以及 被特殊类型标记的 NSNumber 。&lt;/p&gt;
+&lt;p&gt;####建立索引&lt;br&gt;重写 +indexedProperties 方法可以为数据模型中需要添加索引的属性建立索引：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@interface Book : RLMObject&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@property float price;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@property NSString *title;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@end&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@implementation Book&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;+ (NSArray *)indexedProperties &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  return @[@&amp;quot;title&amp;quot;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;@end&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Realm 支持字符串、整数、布尔值以及 NSDate 属性作为索引&lt;/p&gt;
+&lt;p&gt;####默认值&lt;br&gt;重写+defaultPropertyValues可以在每次对象创建之后为其提供默认值。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;+ (NSDictionary *)defaultPropertyValues &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return @&amp;#123;@&amp;quot;price&amp;quot; : @0, @&amp;quot;title&amp;quot;: @&amp;quot;&amp;quot;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;####主键&lt;br&gt;重写 +primaryKey 可以设置模型的主键。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;+ (NSString *)primaryKey &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    return @&amp;quot;id&amp;quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;声明主键之后，对象将被允许查询，更新速度更加高效，并且要求每个对象保持唯一性。&lt;br&gt;一旦带有主键的对象被添加到 Realm 之后，该对象的主键将不可修改。&lt;/p&gt;
+&lt;p&gt;####忽略属性(Ignored Properties)&lt;br&gt;重写 +ignoredProperties 可以防止 Realm 存储数据模型的某个属性。&lt;/p&gt;
+&lt;p&gt;####对象的自更新特性&lt;br&gt;修改某个对象的属性会立刻影响到其他所有指向同一个对象的实例。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Dog *myDog = [[Dog alloc] init];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;myDog.name = @&amp;quot;小白&amp;quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;myDog.age = 1;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[realm transactionWithBlock:^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  [realm addObject:myDog];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Dog *myPuppy = [[Dog objectsWhere:@&amp;quot;age == 1&amp;quot;] firstObject];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[realm transactionWithBlock:^&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  myPuppy.age = 2;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;myDog.age; // =&amp;gt; 2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这样我们页面UI在重绘之前不用再担心数据的刷新或者重新检索&lt;/p&gt;
+&lt;p&gt;####realm数据库&lt;/p&gt;
+&lt;p&gt;#####内存数据库&lt;br&gt;通常情况下，Realm 数据库是存储在硬盘中的，但是可以通过设置 inMemoryIdentifier 而不是设置RLMRealmConfiguration 中的 fileURL 属性，以创建一个完全在内存中运行的数据库。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;config.inMemoryIdentifier = @&amp;quot;MyInMemoryRealm&amp;quot;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;RLMRealm *realm = [RLMRealm realmWithConfiguration:config error:nil];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;内存数据库在每次程序运行期间都不会保存数据。但是，这不会妨碍到 Realm 的其他功能，包括查询、关系以及线程安全。 假如您需要灵活的数据读写但又不想储存数据的话，那么内存数据库对您来说一定是一个不错的选择。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意： 如果某个内存 Realm 数据库实例没有被引用，那么所有的数据就会被释放。强烈建议您在应用的生命周期内保持对Realm内存数据库的强引用，以避免不期望的数据丢失。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;###加密&lt;br&gt;Realm 支持在创建 Realm 数据库时采用64位的密钥对数据库文件进行 AES-256+SHA2 加密。&lt;br&gt;realm加密后会损失性能，但是一般来说会比不加密减少10%&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;realm 笔记&lt;/p&gt;
+&lt;p&gt;Realm支持以下的属性类型：BOOL、bool、int、NSInteger、long、long long、float、double、NSString、NSDate、NSData 以及 被特殊类型标记的 NSNumber 。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>hexo搭建博客</title>
     <link href="https://mycrazy.github.io/2016/06/14/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
     <id>https://mycrazy.github.io/2016/06/14/hexo搭建个人博客/</id>
-    <published>2016-06-14T08:53:22.000Z</published>
-    <updated>2016-06-14T09:43:11.000Z</updated>
+    <published>2016-06-14T08:53:00.000Z</published>
+    <updated>2016-06-17T06:26:14.000Z</updated>
     
     <content type="html">&lt;p&gt;本文主要是记录自己在搭建blog的过程，以便自己忘记的时候查阅。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;环境说明&lt;/strong&gt;&lt;/p&gt;
@@ -28,7 +128,7 @@
 &lt;li&gt;平台：mac&lt;/li&gt;
 &lt;li&gt;软件：Node.js，git，hexo&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;关于git&lt;/strong&gt;&lt;br&gt;首先必须有github账号，并且配置好ssh key，如果没有自行Google。&lt;br&gt;配置好之后，如下图。&lt;br&gt;&lt;img src=&quot;/images/sshkey.png&quot; title=&quot;set sshkey&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关于git&lt;/strong&gt;&lt;br&gt;首先必须有github账号，并且配置好ssh key，如果没有自行Google。&lt;br&gt;配置好之后，如下图。&lt;br&gt;&lt;img src=&quot;/images/hexo/sshkey.png&quot; title=&quot;set sshkey&quot;&gt;&lt;/p&gt;
 &lt;p&gt;测试是否连接自己的github账号&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ssh -T git@github.com&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;如果能够连接成功，会出现如下内容&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Hi mycrazy! You&amp;apos;ve successfully authenticated, but GitHub does not provide shell access.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;参考地址：&lt;a href=&quot;https://help.github.com/articles/testing-your-ssh-connection/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://help.github.com/articles/testing-your-ssh-connection/&lt;/a&gt;&lt;/p&gt;
@@ -42,11 +142,11 @@
 &lt;p&gt;创建一个网站目录文件夹，比如blog，然后cd命令进入该目录。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd /Users/用户名/Desktop/blog&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;pwd 显示当前目录，确认是否自己需要的目录&lt;/p&gt;
 &lt;p&gt;如果无误执行如下命令，构建网站目录。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;hexo init blog&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd blog&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;npm install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;会生成如下几个文件&lt;br&gt;&lt;img src=&quot;/images/file.png&quot; title=&quot;file&quot;&gt;&lt;/p&gt;
+&lt;p&gt;会生成如下几个文件&lt;br&gt;&lt;img src=&quot;/images/hexo/file.png&quot; title=&quot;file&quot;&gt;&lt;/p&gt;
 &lt;p&gt;每个文件夹的存放内容&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;scaffolds 脚手架，也就是一个工具模板&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;scripts 写文件的js，扩展hexo的功能&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;source 存放博客正文内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;source/_posts 文件箱&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;themes 存放皮肤的目录&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;themes/landscape 默认的皮肤&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;_config.yml 全局的配置文件&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;db.json 静态常量&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;node_modules 插件安装目录&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;启动hexo服务器&lt;/strong&gt;&lt;br&gt;hexo server 或者 hexo s&lt;br&gt;弹出如下信息&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;INFO  Start processing&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;^CINFO  Have a nice day&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Ctrl+C停止服务，如果直接强制关闭了终端。则该端口会被占用。&lt;br&gt;使用如下命令更改服务器端口号&lt;br&gt;hexo server -p 5002&lt;/p&gt;
-&lt;p&gt;服务启动之后，在浏览器中打开&lt;a href=&quot;http://0.0.0.0:4000/地址，如果显示如下图片就代表成功。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://0.0.0.0:4000/地址，如果显示如下图片就代表成功。&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/images/成功.png&quot; title=&quot;file&quot;&gt;&lt;/p&gt;
+&lt;p&gt;服务启动之后，在浏览器中打开&lt;a href=&quot;http://0.0.0.0:4000/地址，如果显示如下图片就代表成功。&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://0.0.0.0:4000/地址，如果显示如下图片就代表成功。&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/images/hexo/成功.png&quot; title=&quot;file&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;部署到github网站&lt;/strong&gt;&lt;br&gt;打开hexo根目录的_config.yml文件，文件的最后配置如下信息&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;deploy:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  type: git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  repo: git@github.com:username/username.github.io.git&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  branch: master&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;静态化处理&lt;/strong&gt;&lt;br&gt;通过一条命令，把所有的文章都做静态化处理，就是生成对应的html, javascript, css，使得所有的文章都是由静态文件组成的。&lt;br&gt;hexo generate&lt;br&gt;在本地目录下，会生成一个public的目录，里面包括了所有静态化的文件。&lt;/p&gt;
@@ -131,11 +231,11 @@
       <category term="第一天" scheme="https://mycrazy.github.io/categories/%E6%97%A5%E5%BF%97/%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
     
     
+      <category term="日记" scheme="https://mycrazy.github.io/tags/%E6%97%A5%E8%AE%B0/"/>
+    
       <category term="开始" scheme="https://mycrazy.github.io/tags/%E5%BC%80%E5%A7%8B/"/>
     
       <category term="我" scheme="https://mycrazy.github.io/tags/%E6%88%91/"/>
-    
-      <category term="日记" scheme="https://mycrazy.github.io/tags/%E6%97%A5%E8%AE%B0/"/>
     
   </entry>
   
